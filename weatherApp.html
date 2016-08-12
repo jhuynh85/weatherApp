@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <head>
-	<title>Weather App | San Diego</title>
+	<title>Joseph Huynh | Weather App</title>
+	<!-- font -->
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -14,31 +16,55 @@
 
 	<!-- Weather API -->
 	<script type="text/javascript">
-		var temp, condition, city, country, lat, long;
+		var tempC, tempF, condition, city, country, lat, long, windMetric, windImp;
 
 		function getLocation() {
 			$.getJSON("http://ip-api.com/json", function(res){
 				city = res.city;
 				country = res.countryCode;
 				lat = parseInt(res.lat);
-				long = parseInt(res.long);
+				long = parseInt(res.lon);
+				getWeather();
+				$("#city").html(city);
+				$("#country").html(country);
 			});
 		}
 
 		function getWeather() {
-			var url="http://api.openweathermap.org/data/2.5/weather?";			
-			$.getJSON("http://api.openweathermap.org/data/2.5/weather?q=SanDiego,us&APPID=de173eabdfc949d78ec193b50b80e5dd", function(res){
+			var url="http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units=metric&APPID=de173eabdfc949d78ec193b50b80e5dd";			
+			$.getJSON(url, function(res){
+				condition = res.weather.main;
+				tempC = Math.round(res.main.temp);
+				tempF = Math.round(parseFloat(tempC)*(9/5)+32);
+				windMetric = res.wind.speed;
+				windImp = parseFloat(windMetric)/0.44704;
 
+				$("#temp").html(tempC);
+				$("#wind").html(windMetric);
 			});
 		}
+
+		$(document).ready(function() {
+			getLocation();			
+		});
 
 	</script>
 	
 </head>
 
 <body>
+	<h1>Weather App</h1>
 	<div class="container-fluid">
 		<div class="row">
+			<div class="col-xs-12"><span id="city"></span>, <span id="country"></span></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">Temperature: </div>
+			<div class="col-xs-6 left"><span id="temp"></span></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">Wind: </div>
+			<div class="col-xs-6 left"><span id="wind"></span></div>
 		</div>
 	</div>
 </body>
