@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <head>
+	<meta charset="utf-8">
+
 	<title>Joseph Huynh | Weather App</title>
 	<!-- font -->
 	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
@@ -16,14 +18,41 @@
 
 	<!-- Weather API -->
 	<script type="text/javascript">
-		var tempC, tempF, condition, city, country, lat, long, windMetric, windImp;
+		var tempC, tempF, condition, city, country, lat, long, windAngle, windMetric, windImp, pressure, humidity;
+		var system = "metric";
+
+		function getCardinalDirection(degrees){
+			var directions = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"];
+			return(directions[Math.round(degrees/22.5)+1]);
+		}
+
+		function printWeather(){
+			if (condition==="Clear"){
+
+			}
+
+			if (system==="metric"){
+				$("#temp").html(tempC);
+				$("#degrees").html("°C");
+				$("#speed").html(windMetric);
+				$("#unit").html(" km/h");
+			} else {
+				$("#temp").html(tempF);
+				$("#degrees").html("°F");
+				$("#speed").html(windImp);
+				$("#unit").html(" mph")
+			}
+			$("#cardinal").html(getCardinalDirection(windAngle));
+			$("#humidity").html(humidity+"%");
+			$("#pressure").html(pressure+" hPa");
+		}
 
 		function getLocation() {
 			$.getJSON("http://ip-api.com/json", function(res){
 				city = res.city;
 				country = res.countryCode;
-				lat = parseInt(res.lat);
-				long = parseInt(res.lon);
+				lat = parseFloat(res.lat);
+				long = parseFloat(res.lon);
 				getWeather();
 				$("#city").html(city);
 				$("#country").html(country);
@@ -36,11 +65,12 @@
 				condition = res.weather.main;
 				tempC = Math.round(res.main.temp);
 				tempF = Math.round(parseFloat(tempC)*(9/5)+32);
-				windMetric = res.wind.speed;
-				windImp = parseFloat(windMetric)/0.44704;
-
-				$("#temp").html(tempC);
-				$("#wind").html(windMetric);
+				windMetric = Math.round(res.wind.speed*18/5);	// Convert m/s to km/h
+				windImp = parseFloat(res.wind.speed)/0.44704;
+				windAngle = res.wind.deg;
+				humidity = res.main.humidity;
+				pressure = res.main.pressure;
+				printWeather();
 			});
 		}
 
@@ -59,12 +89,27 @@
 			<div class="col-xs-12"><span id="city"></span>, <span id="country"></span></div>
 		</div>
 		<div class="row">
-			<div class="col-xs-6">Temperature: </div>
-			<div class="col-xs-6 left"><span id="temp"></span></div>
-		</div>
-		<div class="row">
-			<div class="col-xs-6">Wind: </div>
-			<div class="col-xs-6 left"><span id="wind"></span></div>
+			<div class="col-xs-4 right">
+				<ul>
+					<li>Temperature:</li>
+					<li>Wind:</li>
+					<li>Humidity:</li>
+					<li>Pressure:</li>
+				</ul>
+			</div>
+
+			<div class="col-xs-4">
+				<ul style="list-style-type:none">
+					<li><span id="temp"></span><span id="degrees"></span></li>
+					<li><span id="cardinal"></span> <span id="speed"></span><span id="unit"></span></li>
+					<li><span id="humidity"></span></li>
+					<li><span id="pressure"></span></li>
+				</ul>
+			</div>
+
+			<div class="col-xs-4">
+				<div class="fa fa-5x pull-left" id="icon"><i class="fa fa-sun-o" aria-hidden="true"></i></div>
+			</div>
 		</div>
 	</div>
 </body>

@@ -3,7 +3,14 @@ body {
 	font: Raleway, sans-serif;
 }
 
-.container-fluid {
+ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.container, .container-fluid {
+	margin-left: 10%;
+	margin-right: 10%;
 	background-color: lightblue;
 	border-radius: 5px;
 }
@@ -14,4 +21,11 @@ body {
 
 .left {
 	text-align: left;
+	background-color: red;
 }
+
+.right {
+	text-align: right;
+	background-color: green;
+}
+
