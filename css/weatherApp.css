@@ -1,6 +1,13 @@
 body {
 	text-align: center;
 	font: Raleway, sans-serif;
+	background-color: #0B3C5D;
+	color: #fff;
+	min-width: 400px;
+
+	max-width: 42em;
+  padding: 2em;
+  margin: 0 auto;
 }
 
 ul {
@@ -9,10 +16,10 @@ ul {
 }
 
 .container, .container-fluid {
-	margin-left: 10%;
+	margin-top: 10%;
 	margin-right: 10%;
-	background-color: lightblue;
 	border-radius: 5px;
+/*	background-color: #FFCE00; */
 }
 
 .center {
@@ -21,11 +28,21 @@ ul {
 
 .left {
 	text-align: left;
-	background-color: red;
+/*	background-color: red; */
 }
 
 .right {
 	text-align: right;
-	background-color: green;
+	padding-bottom: 10%;
+	font-weight: bold;
+/*	background-color: green; */
 }
 
+#city, #country {
+	font-size: 2em;
+}
+
+#temp {
+	font-size: 3em;
+	font-weight: bold;
+}
