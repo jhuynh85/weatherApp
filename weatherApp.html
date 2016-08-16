@@ -7,9 +7,6 @@
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-	<!-- font -->
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-
 	<!-- icons -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
@@ -27,6 +24,13 @@
 	<!-- Weather API -->
 	<script type="text/javascript">		
 		$(document).ready(function() {
+
+			// Toggle between metric/imperial units
+			$('input[type=radio][name=degrees]').change(function() {
+        		system = this.value;
+        		printWeather();
+        	});
+
 			getLocation();			
 		});
 
@@ -37,13 +41,16 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-12"><span id="city"></span>, <span id="country"></span></div>
+			<div class="col-xs-12"><span id="name"></span></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12"><span id="city"></span><span id="country"></span></div>
 		</div>
 		<br>
 		<div class="row">
 			<div class="col-xs-4 right">
 				<ul>
-					<br><br><br>
+					<br><br><br><br><br>
 					<li>Wind:</li>
 					<li>Humidity:</li>
 					<li>Pressure:</li>
@@ -51,22 +58,21 @@
 			</div>
 
 			<div class="col-xs-4 left">
-				<ul style="list-style-type:none">
+				<ul>
 					<li><span id="temp"></span></li>
+					<li><span id="condition"></span><br><br></li>
 					<li><span id="cardinal"></span> <span id="speed"></span><span id="unit"></span></li>
 					<li><span id="humidity"></span></li>
 					<li><span id="pressure"></span></li>
 				</ul>
 				<br>
 				<div class="btn-group" data-toggle="buttons">
-					<label class="btn btn-xs btn-primary active"><input type="radio" name="degrees" checked>Metric</label>
-					<label class="btn btn-xs btn-primary"><input type="radio" name="degrees">Imperial</label>
+					<label class="btn btn-primary active"><input type="radio" name="degrees" value="Metric" checked>°C</label>
+					<label class="btn btn-primary"><input type="radio" name="degrees" value="Imperial">°F</label>
 				</div>
 			</div>
 
-			<div class="col-xs-4">
-				<br><br><br><br><br><br><br>								
-				<div class="icon sun"><div class="rays"></div></div>				
+			<div class="col-xs-4" id="image">			
 			</div>
 		</div>
 	</div>

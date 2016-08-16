@@ -2,13 +2,12 @@ html { box-sizing: border-box; }
 html *,
 html *:before,
 html *:after { box-sizing: inherit; }
-/*
+
 body {
   max-width: 42em;
   padding: 2em;
   margin: 0 auto;
   color: #161616;
-  font-family: 'Roboto', sans-serif;
   text-align: center;
   background-color: currentColor;
 }
@@ -26,9 +25,9 @@ a {
   font-size: small;
 }
 p { margin: 1.375rem 0; }
-*/
+
 .icon {
-  position: relative;
+  /*position: relative;*/
   display: inline-block;
   width: 12em;
   height: 10em;
@@ -134,7 +133,7 @@ p { margin: 1.375rem 0; }
   width: 3.75em;
   height: 3.75em;
   margin: 0.375em 0 0 -2em;
-  background: currentColor;
+  /* background: currentColor; */
 }
 
 .rain:after {
