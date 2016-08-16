@@ -1,7 +1,7 @@
 body {
 	text-align: center;
 	font-family: 'Roboto', sans-serif;
-	background-color: #0B3C5D;
+	background-color: #1D2731;
 	color: #fff;
 	min-width: 550px;
 }
@@ -17,7 +17,7 @@ ul {
 	border-radius: 10px;	
 	padding: 5%;
 	padding-left: 0;
-	background-color: #1D2731;
+	background-color: #0B3C5D;
 	border-style: solid;
 	border-color: #fff; 
 }
