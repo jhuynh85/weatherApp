@@ -14,7 +14,7 @@ function getLocation() {
 	});
 }
 
-// Uses forismatic API to retrieve weather conditions of current location
+// Uses openweathermap API to retrieve weather conditions of current location
 function getWeather() {
 	var url="http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units=metric&APPID=de173eabdfc949d78ec193b50b80e5dd";			
 	$.getJSON(url, function(res){
